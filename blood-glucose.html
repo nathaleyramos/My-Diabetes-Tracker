@@ -253,6 +253,14 @@
 
     updateTable();
   </script>
-
+  <script>
+  // Find all dashboard links and update them to point to index.html
+  document.addEventListener('DOMContentLoaded', function() {
+    const dashboardLinks = document.querySelectorAll('a[href="dashboard.html"]');
+    dashboardLinks.forEach(link => {
+      link.setAttribute('href', 'index.html');
+    });
+  });
+</script>
 </body>
 </html>
