@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Profile - My Diabetes Tracker</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #00b4db, #00ecbc);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: #fff;
+      padding: 40px;
+      border-radius: 15px;
+      width: 100%;
+      max-width: 550px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      position: relative;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .info-row {
+      margin-bottom: 15px;
+    }
+
+    .info-row label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .info-row p {
+      background: #f0f0f0;
+      padding: 10px;
+      border-radius: 6px;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background-color: #00b4db;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0099b8;
+    }
+
+    .hipaa {
+      text-align: center;
+      font-size: 13px;
+      color: #555;
+      margin-top: 30px;
+      background: #e9f7f8;
+      padding: 15px;
+      border-radius: 10px;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Your Profile</h2>
+
+    <div class="info-row">
+      <label>Full Name</label>
+      <p id="profileName">-</p>
+    </div>
+
+    <div class="info-row">
+      <label>Email Address</label>
+      <p id="profileEmail">-</p>
+    </div>
+
+    <div class="info-row">
+      <label>Type of Diabetes</label>
+      <p id="profileType">-</p>
+    </div>
+
+    <div class="info-row">
+      <label>Year Diagnosed</label>
+      <p id="profileYear">-</p>
+    </div>
+
+    <div class="info-row">
+      <label>Current Treatment</label>
+      <p id="profileTreatment">-</p>
+    </div>
+
+    <button onclick="logout()">Log Out</button>
+
+    <div class="hipaa">
+      <strong>Privacy Notice:</strong><br />
+      All personal health information you provide on this site is protected and stored locally.
+      In accordance with HIPAA principles, your data remains private and will not be accessible
+      to others without your explicit permission.
+    </div>
+  </div>
+
+  <script>
+    const user = JSON.parse(localStorage.getItem("userProfile"));
+
+    if (user) {
+      document.getElementById("profileName").textContent = user.name || "-";
+      document.getElementById("profileEmail").textContent = user.email || "-";
+      document.getElementById("profileType").textContent = user.diabetesType || "-";
+      document.getElementById("profileYear").textContent = user.diagnosisYear || "-";
+      document.getElementById("profileTreatment").textContent = user.treatment || "-";
+    }
+
+    function logout() {
+      localStorage.removeItem("userProfile");
+      alert("You have been logged out.");
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>

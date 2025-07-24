@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Share Your Journey</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      height: 100vh;
+      background: linear-gradient(to right, #00b4db, #00ecbc);
+    }
+
+    .sidebar {
+      width: 220px;
+      background-color: #003d4d;
+      color: white;
+      padding: 20px;
+    }
+
+    .sidebar .logo {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .sidebar .logo i {
+      font-size: 24px;
+      margin-right: 10px;
+      color: #00ecbc;
+    }
+
+    .sidebar a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      margin: 10px 0;
+      font-size: 15px;
+      padding: 8px;
+      border-radius: 6px;
+    }
+
+    .sidebar a:hover {
+      background-color: #005e6e;
+    }
+
+    .sidebar .section-title {
+      margin-top: 25px;
+      font-weight: bold;
+      font-size: 14px;
+      opacity: 0.7;
+    }
+
+    .main {
+      flex: 1;
+      background-color: white;
+      border-radius: 25px 0 0 25px;
+      padding: 30px;
+      overflow-y: auto;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 150px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 14px;
+      resize: none;
+      margin-bottom: 20px;
+    }
+
+    .rating {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .rating i {
+      font-size: 25px;
+      color: #ccc;
+      cursor: pointer;
+    }
+
+    .rating i.selected {
+      color: gold;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #00b4db;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0099b8;
+    }
+
+    .confirmation {
+      margin-top: 15px;
+      color: green;
+      font-weight: bold;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="logo" onclick="showCreatorModal()">
+      <i class="fas fa-syringe"></i>
+      <h2>My Diabetes<br>Tracker</h2>
+    </div>
+
+    <a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+    <div class="section-title">Tracking</div>
+    <a href="blood-glucose.html"><i class="fas fa-tint"></i> Blood Glucose Log</a>
+    <a href="meds-insulin.html"><i class="fas fa-pills"></i> Meds/Insulin Log</a>
+    <a href="meal-tracker.html"><i class="fas fa-utensils"></i> Meal Tracker</a>
+    <a href="exercise.html"><i class="fas fa-dumbbell"></i> Exercise Log</a>
+
+    <div class="section-title">Analytics Report</div>
+    <a href="progress.html"><i class="fas fa-chart-line"></i> Progress</a>
+    <a href="report-log.html"><i class="fas fa-file-alt"></i> Report Log</a>
+
+    <div class="section-title">Resources</div>
+    <a href="education.html"><i class="fas fa-book"></i> Education Hub</a>
+    <a href="faq.html"><i class="fas fa-question-circle"></i> FAQs</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+    <h1>Share Your Journey</h1>
+
+    <p>We’d love to hear how your diabetes journey has been. Share your thoughts, challenges, or victories below:</p>
+
+    <textarea placeholder="Write your reflection here..."></textarea>
+
+    <h3>How would you rate your experience using this tracker?</h3>
+    <div class="rating" id="starRating">
+      <i class="fas fa-star" data-value="1"></i>
+      <i class="fas fa-star" data-value="2"></i>
+      <i class="fas fa-star" data-value="3"></i>
+      <i class="fas fa-star" data-value="4"></i>
+      <i class="fas fa-star" data-value="5"></i>
+    </div>
+
+    <button onclick="submitJourney()">Submit</button>
+    <p class="confirmation" id="confirmationMessage">Thank you for sharing your journey! 💙</p>
+  </div>
+
+  <!-- Creator Modal -->
+  <div id="creatorModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+    background:rgba(0,0,0,0.5); z-index:1000; justify-content:center; align-items:center;">
+    <div style="background:#fff; padding:30px; border-radius:10px; max-width:400px; text-align:center; box-shadow: 0 0 10px rgba(0,0,0,0.2);">
+      <h2>About This Site</h2>
+      <p style="margin-top:10px;">
+        This website was created by <strong>Nathaley Nichole Ramos</strong>,<br>
+        a 2nd-year Nursing student from <br><strong>Our Lady of Fatima University – QC</strong>.
+      </p>
+      <button onclick="closeCreatorModal()" style="margin-top:20px; padding:10px 20px; border:none; background:#00b4db; color:white; border-radius:6px; cursor:pointer;">
+        Close
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // Star Rating
+    const stars = document.querySelectorAll('.rating i');
+    stars.forEach(star => {
+      star.addEventListener('click', () => {
+        const rating = star.getAttribute('data-value');
+        stars.forEach(s => s.classList.remove('selected'));
+        for (let i = 0; i < rating; i++) {
+          stars[i].classList.add('selected');
+        }
+      });
+    });
+
+    function submitJourney() {
+      document.getElementById('confirmationMessage').style.display = 'block';
+      setTimeout(() => {
+        document.getElementById('confirmationMessage').style.display = 'none';
+      }, 4000);
+    }
+
+    function showCreatorModal() {
+      document.getElementById("creatorModal").style.display = "flex";
+    }
+
+    function closeCreatorModal() {
+      document.getElementById("creatorModal").style.display = "none";
+    }
+  </script>
+
+</body>
+</html>

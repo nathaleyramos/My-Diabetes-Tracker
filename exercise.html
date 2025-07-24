@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise Log</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      height: 100vh;
+      background: linear-gradient(to right, #00b4db, #00ecbc);
+    }
+
+    .sidebar {
+      width: 220px;
+      background-color: #003d4d;
+      color: white;
+      padding: 20px;
+    }
+
+    .sidebar .logo {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+      font-size: 18px;
+    }
+
+    .sidebar .logo i {
+      font-size: 24px;
+      margin-right: 10px;
+      color: #00ecbc;
+    }
+
+    .sidebar h2 {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .sidebar a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      margin: 10px 0;
+      font-size: 15px;
+      padding: 8px;
+      border-radius: 6px;
+    }
+
+    .sidebar a:hover {
+      background-color: #005e6e;
+    }
+
+    .sidebar .section-title {
+      margin-top: 25px;
+      font-weight: bold;
+      font-size: 14px;
+      opacity: 0.7;
+    }
+
+    .main {
+      flex: 1;
+      background-color: white;
+      border-radius: 25px 0 0 25px;
+      padding: 30px;
+      overflow-y: auto;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .top-bar input {
+      width: 300px;
+      padding: 10px;
+      border-radius: 25px;
+      border: 1px solid #ccc;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .user-info i {
+      font-size: 22px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      max-width: 500px;
+      gap: 10px;
+    }
+
+    input, textarea, select {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    button {
+      background-color: #00b4db;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #009bb3;
+    }
+
+    table {
+      margin-top: 30px;
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f0f0f0;
+    }
+
+    .section-title {
+      margin-top: 40px;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="logo">
+      <i class="fas fa-syringe"></i>
+      <h2>My Diabetes<br>Tracker</h2>
+    </div>
+
+    <a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+    <div class="section-title">Tracking</div>
+    <a href="blood-glucose.html"><i class="fas fa-tint"></i> Blood Glucose Log</a>
+    <a href="meds-insulin.html"><i class="fas fa-pills"></i> Meds/Insulin Log</a>
+    <a href="meal-tracker.html"><i class="fas fa-utensils"></i> Meal Tracker</a>
+    <a href="exercise.html"><i class="fas fa-dumbbell"></i> Exercise Log</a>
+
+    <div class="section-title">Analytics Report</div>
+    <a href="progress.html"><i class="fas fa-chart-line"></i> Progress</a>
+    <a href="report-log.html"><i class="fas fa-file-alt"></i> Report Log</a>
+
+    <div class="section-title">Resources</div>
+    <a href="education.html"><i class="fas fa-book"></i> Education Hub</a>
+    <a href="faq.html"><i class="fas fa-question-circle"></i> FAQs</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+    <div class="top-bar">
+      <input type="text" placeholder="Search exercises...">
+      <div class="user-info">
+        <span id="displayName">User</span>
+        <i class="fas fa-user-circle"></i>
+        <i class="fas fa-bell"></i>
+      </div>
+    </div>
+
+    <h1>Exercise Log</h1>
+
+    <form id="exerciseForm">
+      <input type="date" id="date" required>
+      <input type="time" id="time" required>
+      <select id="type" required>
+        <option value="">Select Exercise Type</option>
+        <option>Walking</option>
+        <option>Running</option>
+        <option>Cycling</option>
+        <option>Swimming</option>
+        <option>Yoga</option>
+        <option>Other</option>
+      </select>
+      <input type="number" id="duration" placeholder="Duration (minutes)" required>
+      <textarea id="notes" rows="3" placeholder="Optional notes..."></textarea>
+      <button type="submit">Add Entry</button>
+    </form>
+
+    <div class="section-title">Recent 7-Day Entries</div>
+    <table id="logTable">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Type</th>
+          <th>Duration</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Entries will go here -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    const form = document.getElementById('exerciseForm');
+    const tableBody = document.querySelector('#logTable tbody');
+
+    let logs = JSON.parse(localStorage.getItem('exerciseLogs')) || [];
+
+    function updateTable() {
+      tableBody.innerHTML = '';
+      const recent = logs.slice(-7).reverse();
+      recent.forEach(entry => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${entry.date}</td>
+          <td>${entry.time}</td>
+          <td>${entry.type}</td>
+          <td>${entry.duration} mins</td>
+          <td>${entry.notes}</td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const entry = {
+        date: document.getElementById('date').value,
+        time: document.getElementById('time').value,
+        type: document.getElementById('type').value,
+        duration: document.getElementById('duration').value,
+        notes: document.getElementById('notes').value
+      };
+      logs.push(entry);
+      localStorage.setItem('exerciseLogs', JSON.stringify(logs));
+      updateTable();
+      form.reset();
+    });
+
+    updateTable();
+  </script>
+
+</body>
+</html>

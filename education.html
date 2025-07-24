@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Education Hub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      height: 100vh;
+      background: linear-gradient(to right, #00b4db, #00ecbc);
+    }
+
+    .sidebar {
+      width: 220px;
+      background-color: #003d4d;
+      color: white;
+      padding: 20px;
+    }
+
+    .sidebar .logo {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+      font-size: 18px;
+    }
+
+    .sidebar .logo i {
+      font-size: 24px;
+      margin-right: 10px;
+      color: #00ecbc;
+    }
+
+    .sidebar a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      margin: 10px 0;
+      font-size: 15px;
+      padding: 8px;
+      border-radius: 6px;
+    }
+
+    .sidebar a:hover {
+      background-color: #005e6e;
+    }
+
+    .sidebar .section-title {
+      margin-top: 25px;
+      font-weight: bold;
+      font-size: 14px;
+      opacity: 0.7;
+    }
+
+    .main {
+      flex: 1;
+      background-color: white;
+      border-radius: 25px 0 0 25px;
+      padding: 30px;
+      overflow-y: auto;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .section {
+      margin-bottom: 30px;
+    }
+
+    .section h2 {
+      font-size: 20px;
+      color: #00b4db;
+      margin-bottom: 10px;
+    }
+
+    .section p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    .section a {
+      color: #0077cc;
+      text-decoration: none;
+    }
+
+    .section a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="logo">
+      <i class="fas fa-syringe"></i>
+      <h2>My Diabetes<br>Tracker</h2>
+    </div>
+
+    <a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+    <div class="section-title">Tracking</div>
+    <a href="blood-glucose.html"><i class="fas fa-tint"></i> Blood Glucose Log</a>
+    <a href="meds-insulin.html"><i class="fas fa-pills"></i> Meds/Insulin Log</a>
+    <a href="meal-tracker.html"><i class="fas fa-utensils"></i> Meal Tracker</a>
+    <a href="exercise.html"><i class="fas fa-dumbbell"></i> Exercise Log</a>
+
+    <div class="section-title">Analytics Report</div>
+    <a href="progress.html"><i class="fas fa-chart-line"></i> Progress</a>
+    <a href="report-log.html"><i class="fas fa-file-alt"></i> Report Log</a>
+
+    <div class="section-title">Resources</div>
+    <a href="education.html"><i class="fas fa-book"></i> Education Hub</a>
+    <a href="faq.html"><i class="fas fa-question-circle"></i> FAQs</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+    <div class="top-bar">
+      <h1>Education Hub</h1>
+      <div class="user-info">
+        <span id="displayName">User</span>
+        <i class="fas fa-user-circle"></i>
+        <i class="fas fa-bell"></i>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>What is Diabetes?</h2>
+      <p>
+        Diabetes is a chronic condition that affects how your body processes blood sugar (glucose).
+        There are two main types:
+        <strong>Type 1</strong>, where the body produces little or no insulin, and
+        <strong>Type 2</strong>, where the body becomes resistant to insulin or doesn’t produce enough.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>Why Track Your Data?</h2>
+      <p>
+        Tracking your glucose levels, meals, medications, and exercise helps identify trends,
+        improve treatment decisions, and avoid complications. Studies show better tracking leads to
+        better blood sugar control.
+        <br>
+        <a href="https://www.sciencedirect.com/science/article/abs/pii/S1499404620300525" target="_blank">
+          Read study on self-monitoring and glycemic control →
+        </a>
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>Blood Glucose Target Ranges</h2>
+      <p>
+        Normal blood glucose targets (may vary by person):
+        <ul>
+          <li>Before meals: 80–130 mg/dL</li>
+          <li>1–2 hours after meals: less than 180 mg/dL</li>
+        </ul>
+        Always follow your healthcare provider’s specific recommendations.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>Healthy Lifestyle Tips</h2>
+      <p>
+        - Choose fiber-rich foods and avoid processed sugars<br>
+        - Move regularly (even walking helps!)<br>
+        - Stay hydrated and get enough sleep<br>
+        - Keep stress in check — it affects blood sugar, too!
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>Signs of High or Low Blood Sugar</h2>
+      <p>
+        <strong>Low Blood Sugar (Hypoglycemia):</strong> shakiness, sweating, dizziness, confusion<br>
+        <strong>High Blood Sugar (Hyperglycemia):</strong> thirst, frequent urination, fatigue, blurry vision
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>Trusted External Resources</h2>
+      <ul>
+        <li>
+          <a href="https://www.diabetes.org/diabetes" target="_blank">American Diabetes Association – What is Diabetes?</a>
+        </li>
+        <li>
+          <a href="https://www.cdc.gov/diabetes/basics/index.html" target="_blank">CDC – Diabetes Basics</a>
+        </li>
+        <li>
+          <a href="https://www.sciencedirect.com/science/article/pii/S1262363617300753" target="_blank">ScienceDirect: Impact of glucose monitoring</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</body>
+</html>

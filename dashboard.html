@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard - My Diabetes Tracker</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      height: 100vh;
+      background-color: #f0f4f8;
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: #003d4d;
+      color: white;
+      padding: 20px;
+    }
+
+    .sidebar .logo {
+      display: flex;
+      align-items: center;
+      font-size: 18px;
+      margin-bottom: 40px;
+      cursor: pointer;
+    }
+
+    .sidebar .logo i {
+      font-size: 22px;
+      margin-right: 10px;
+      color: #00ecbc;
+    }
+
+    .sidebar a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      margin: 12px 0;
+      font-size: 15px;
+      padding: 8px;
+      border-radius: 6px;
+    }
+
+    .sidebar a:hover {
+      background-color: #005e6e;
+    }
+
+    .sidebar .section-title {
+      margin-top: 30px;
+      font-weight: bold;
+      font-size: 14px;
+      opacity: 0.7;
+    }
+
+    .main {
+      flex: 1;
+      background-color: white;
+      border-radius: 25px 0 0 25px;
+      padding: 30px;
+      overflow-y: auto;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .top-bar .greeting {
+      font-size: 24px;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .notification-wrapper {
+      position: relative;
+    }
+
+    .notification-box {
+      display: none;
+      position: absolute;
+      top: 30px;
+      right: 0;
+      width: 250px;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 10px;
+      z-index: 10;
+    }
+
+    .notification-box ul {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 10px;
+    }
+
+    .notification-box ul li {
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 14px;
+    }
+
+    .notification-box ul li:last-child {
+      border-bottom: none;
+    }
+
+    .search-bar {
+      margin-bottom: 25px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .search-bar input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    .search-bar button {
+      padding: 10px 20px;
+      background-color: #00b4db;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .search-bar button:hover {
+      background-color: #0099b8;
+    }
+
+    .quote-and-chat {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 30px;
+    }
+
+    .chat-box {
+      max-width: 35%;
+      background: #e6faff;
+      border: 2px solid #b3f0ff;
+      border-radius: 15px;
+      padding: 15px 20px;
+      font-size: 16px;
+      color: #007b91;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 40px;
+    }
+
+    .button-group a {
+      text-decoration: none;
+      padding: 15px 25px;
+      background-color: #00b4db;
+      color: white;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+
+    .button-group a:hover {
+      background-color: #0099b8;
+    }
+
+    .info-section h3 {
+      margin-bottom: 10px;
+    }
+
+    .info-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .info-buttons a {
+      flex: 1;
+      min-width: 200px;
+      background: #eee;
+      padding: 12px 15px;
+      border-radius: 6px;
+      text-align: center;
+      color: #333;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .info-buttons a:hover {
+      background-color: #ddd;
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="logo" onclick="showCreatorModal()">
+      <i class="fas fa-syringe"></i>
+      <h2>My Diabetes Tracker</h2>
+    </div>
+    <a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+    <div class="section-title">Tracking</div>
+    <a href="blood-glucose.html"><i class="fas fa-tint"></i> Blood Glucose Log</a>
+    <a href="meds-insulin.html"><i class="fas fa-pills"></i> Meds/Insulin Log</a>
+    <a href="meal-tracker.html"><i class="fas fa-utensils"></i> Meal Tracker</a>
+    <a href="exercise.html"><i class="fas fa-dumbbell"></i> Exercise Log</a>
+
+    <div class="section-title">Analytics</div>
+    <a href="progress.html"><i class="fas fa-chart-line"></i> Progress</a>
+    <a href="report-log.html"><i class="fas fa-file-alt"></i> Report Log</a>
+
+    <div class="section-title">Resources</div>
+    <a href="education.html"><i class="fas fa-book"></i> Education Hub</a>
+    <a href="faq.html"><i class="fas fa-question-circle"></i> FAQs</a>
+    <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+  </div>
+
+  <!-- Main Dashboard -->
+  <div class="main">
+    <div class="top-bar">
+      <div class="greeting">Welcome back, <span id="displayName">User</span>!</div>
+      <div class="user-info">
+        <span id="topName">User</span>
+        <i class="fas fa-user-circle"></i>
+        <div class="notification-wrapper">
+          <i class="fas fa-bell" onclick="toggleNotifications()" style="cursor:pointer;"></i>
+          <div id="notificationBox" class="notification-box">
+            <p><strong>Notifications</strong></p>
+            <ul id="notificationsList">
+              <li>✅ Blood glucose log saved</li>
+              <li>🍽️ Meal tracker updated</li>
+              <li>💊 Don't forget to log insulin today</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search diabetes-related topics (e.g. diet, insulin, exercise)">
+      <button onclick="searchDiabetes()">Search</button>
+    </div>
+
+    <!-- Quote & Chatbox -->
+    <div class="quote-and-chat">
+      <div>
+        <h2 style="font-size: 26px; color: #333;">Small steps, big progress. Let's track it together.</h2>
+      </div>
+      <div class="chat-box">
+        💬 Hi <span id="chatUser">User</span>! How are you feeling today?
+      </div>
+    </div>
+
+    <!-- Dashboard Buttons -->
+    <div class="button-group">
+      <a href="blood-glucose.html">Get Started</a>
+      <a href="share-your-journey.html">Share Your Journey</a>
+      <a href="journal.html">Journey Diary</a>
+    </div>
+
+    <!-- Info Buttons -->
+    <div class="info-section">
+      <h3>Learn & Report</h3>
+      <div class="info-buttons">
+        <a href="diabetes-facts.html">Facts About Diabetes</a>
+        <a href="diabetes-misconceptions.html">Common Misconceptions</a>
+        <a href="diabetes-dos-donts.html">Dos and Don'ts</a>
+        <a href="report-problem.html">Report a Problem</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Creator Modal -->
+  <div id="creatorModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+    background:rgba(0,0,0,0.5); z-index:1000; justify-content:center; align-items:center;">
+    <div style="background:#fff; padding:30px; border-radius:10px; max-width:400px; text-align:center; box-shadow: 0 0 10px rgba(0,0,0,0.2);">
+      <h2>About This Site</h2>
+      <p style="margin-top:10px;">
+        This website was created by <strong>Nathaley Nichole Ramos</strong>,<br>
+        a 2nd-year Nursing student from <br><strong>Our Lady of Fatima University – QC</strong>.
+      </p>
+      <button onclick="closeCreatorModal()" style="margin-top:20px; padding:10px 20px; border:none; background:#00b4db; color:white; border-radius:6px; cursor:pointer;">
+        Close
+      </button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    function toggleNotifications() {
+      const box = document.getElementById("notificationBox");
+      box.style.display = box.style.display === "block" ? "none" : "block";
+    }
+
+    function showCreatorModal() {
+      document.getElementById("creatorModal").style.display = "flex";
+    }
+
+    function closeCreatorModal() {
+      document.getElementById("creatorModal").style.display = "none";
+    }
+
+    function searchDiabetes() {
+      const query = document.getElementById("searchInput").value.trim();
+      if (query !== "") {
+        const url = `https://www.youtube.com/results?search_query=diabetes+${encodeURIComponent(query)}`;
+        window.open(url, "_blank");
+      }
+    }
+
+    window.onload = () => {
+      const user = JSON.parse(localStorage.getItem('userProfile'));
+      if (user && user.name) {
+        document.getElementById("displayName").textContent = user.name;
+        document.getElementById("topName").textContent = user.name;
+        document.getElementById("chatUser").textContent = user.name;
+      }
+    };
+
+    window.addEventListener("click", function(e) {
+      const bell = document.querySelector(".fa-bell");
+      const box = document.getElementById("notificationBox");
+      if (!bell.contains(e.target) && !box.contains(e.target)) {
+        box.style.display = "none";
+      }
+    });
+  </script>
+</body>
+</html>
